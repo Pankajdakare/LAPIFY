@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block 'main' %}
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            
+            {% if success %}
+            <div class="alert alert-success" role="alert">
+                    {{ success }}
+            </div>
+        {% endif %}
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h3 class="title">Your Shopping Cart</h3>
+                </div>
+            </div>
+            <!-- /section title -->
+
+            <!-- Products in Cart -->
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="products-tabs">
+                        <div class="tab-pane active">
+                            <div class="products-slick">
+                                <!-- Cart Items Loop -->
+                                {% for cart in mycart %}
+                                <div class="product">
+                                    <div class="product-img">
+                                        <img src="{{ cart.pid.la_image.url }}" alt="{{ cart.pid.Name }}">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category">{{ cart.pid.type }}</p>
+                                        <h3 class="product-name"><a href="#">{{ cart.pid.Name }}</a></h3>
+                                        <h4 class="product-price">{{ cart.pid.price }}/-</h4>
+                                        <div class="product-rating">
+                                            <!-- Your Rating Display Code -->
+                                        </div>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <a href="/delete/{{ cart.id }}" class="btn btn-danger">Remove</a>
+                                    </div>
+                                </div>
+                                <!-- /product -->
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Products in Cart -->
+
+            <!-- Cart Summary -->
+            <div class="col-md-12">
+                <div class="cart-summary">
+                    <h4>Cart Summary</h4>
+                    <p>Total: {{ total }}</p>
+                    <a href="/checkout" class="btn btn-danger">CHECKOUT</a>
+                    <!-- More Summary Information -->
+                </div>
+            </div>
+            <!-- /Cart Summary -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+{% endblock 'main' %}
